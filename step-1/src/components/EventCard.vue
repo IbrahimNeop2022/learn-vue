@@ -1,8 +1,10 @@
 <template>
-  <div class="event-card">
-    <span>@ {{ event.time }} on {{ event.date }}</span>
-    <h4>{{ event.title }}</h4>
-  </div>
+  <router-link :to="{ name: 'events.show', params: { id: event.id } }">
+    <div class="event-card">
+      <span>@ {{ event.time }} on {{ event.date }}</span>
+      <h4>{{ event.title }}</h4>
+    </div>
+  </router-link>
 </template>
 
 <script>
@@ -31,6 +33,6 @@ export default {
 }
 
 .event-card:hover {
-  border: 1px solid #0086c4;
+  border: 2px solid #0086c4;
 }
 </style>

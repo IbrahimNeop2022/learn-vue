@@ -16,8 +16,8 @@ import HelloWorld from "@/components/HelloWorld.vue";
     <div class="wrapper">
       <HelloWorld msg="Hello World" />
       <nav>
-        <RouterLink to="/">Events</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
+        <RouterLink :to="{ name: 'events' }">Events</RouterLink>
+        <RouterLink :to="{ name: 'about' }">About</RouterLink>
       </nav>
     </div>
   </header>

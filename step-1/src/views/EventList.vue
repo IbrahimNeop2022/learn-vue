@@ -1,6 +1,6 @@
 <script setup>
 import EventCard from "@/components/EventCard.vue";
-import axios from "axios";
+import EventService from "@/services/EventService.js";
 </script>
 
 <template>
@@ -19,8 +19,7 @@ export default {
   },
 
   created() {
-    axios
-      .get("https://vue-backend.local/api/events")
+    EventService.getEvents()
       .then((response) => {
         this.events = response.data;
       })

@@ -21,6 +21,7 @@ class EventFactory extends Factory
             'user_id' => User::inRandomOrder()->first(),
             'title' => $this->faker->sentence,
             'category' => $this->faker->word,
+            'description' => $this->faker->text,
             'location' => $this->faker->city,
             'time' => $this->faker->time(),
             'date' => $this->faker->date(),
