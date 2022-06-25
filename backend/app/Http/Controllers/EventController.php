@@ -15,7 +15,7 @@ class EventController extends Controller
      */
     public function index()
     {
-        return response()->json(Event::with('user')->get());
+        return response()->json(Event::with('user')->paginate(5));
     }
 
     /**
@@ -36,7 +36,9 @@ class EventController extends Controller
      */
     public function store(StoreEventRequest $request)
     {
-        //
+        Event::create($request->validated());
+
+        return response()->json('Add successfully');
     }
 
     /**
@@ -81,6 +83,8 @@ class EventController extends Controller
      */
     public function destroy(Event $event)
     {
-        //
+        $event->delete();
+
+        return response()->json('Deleted successfully');
     }
 }

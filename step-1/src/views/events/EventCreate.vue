@@ -1,136 +1,101 @@
-<script setup></script>
+<script setup>
+import EventService from '@/services/EventService';
+</script>
 
 <template>
-  <div class="container">
-    <form action="/action_page.php">
-      <div class="row">
-        <div class="col-25">
-          <label for="fname">First Name</label>
-        </div>
-        <div class="col-75">
-          <input
-            type="text"
-            id="fname"
-            name="firstname"
-            placeholder="Your name.."
-          />
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-25">
-          <label for="lname">Last Name</label>
-        </div>
-        <div class="col-75">
-          <input
-            type="text"
-            id="lname"
-            name="lastname"
-            placeholder="Your last name.."
-          />
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-25">
-          <label for="country">Country</label>
-        </div>
-        <div class="col-75">
-          <select id="country" name="country">
-            <option value="australia">Australia</option>
-            <option value="canada">Canada</option>
-            <option value="usa">USA</option>
-          </select>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-25">
-          <label for="subject">Subject</label>
-        </div>
-        <div class="col-75">
-          <textarea
-            id="subject"
-            name="subject"
-            placeholder="Write something.."
-            style="height: 200px"
-          ></textarea>
-        </div>
-      </div>
-      <br />
-      <div class="row">
-        <input type="submit" value="Submit" />
-      </div>
-    </form>
-  </div>
+  <form class="row g-3" @submit.prevent="store()">
+    <div class="col-md-6">
+      <label for="title" class="form-label">Title</label>
+      <input
+        type="text"
+        class="form-control"
+        v-model="title"
+        id="title"
+        placeholder="Enter Title"
+      />
+    </div>
+    <div class="col-md-6">
+      <label for="category" class="form-label">Category</label>
+      <select v-model="category" id="category" class="form-select">
+        <option selected>Choose...</option>
+        <option>Category 1</option>
+        <option>Category 2</option>
+      </select>
+    </div>
+    <div class="col-12">
+      <label for="description" class="form-label">Description</label>
+      <textarea
+        class="form-control"
+        v-model="description"
+        id="description"
+        placeholder="Enter description"
+      ></textarea>
+    </div>
+    <div class="col-md-4">
+      <label  for="location" class="form-label">Location</label>
+      <input
+        type="text"
+        v-model="location"
+        class="form-control"
+        id="location"
+        placeholder="Enter Location"
+      />
+    </div>
+    <div class="col-md-4">
+      <label for="date" class="form-label">Date</label>
+      <input v-model="date" type="date" class="form-control" id="date" />
+    </div>
+    <div class="col-md-4">
+      <label for="time" class="form-label">Time</label>
+      <input v-model="time" type="time" class="form-control" id="time" />
+    </div>
+    <div class="col-12">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </form>
 </template>
 
-<script></script>
+<script>
+export default {
+  data() {
+    return {
+      title:null,
+      category:null,
+      description:null,
+      location:null,
+      date:null,
+      time:null,
+    }
+  },
+  methods: {
+    store(){
+      EventService.createEvent({
+        title: this.title,
+        category: this.category,
+        description: this.description,
+        location: this.location,
+        date: this.date,
+        time: this.time,
+      }).then((response) => {
+        console.log(response.data);
+        this.emptying();
+      })
+      .catch((error) => {
+        console.log(error.response.status);
+      });
+    },
+    emptying(){
+      this.title = null
+      this.category = null
+      this.description = null
+      this.location = null
+      this.date = null
+      this.time = null
+    
+    }
 
-<style scoped>
-* {
-  box-sizing: border-box;
-  margin-top: 40px;
-}
-
-input[type="text"],
-select,
-textarea {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  resize: vertical;
-}
-
-label {
-  padding: 12px 12px 12px 0;
-  display: inline-block;
-}
-
-input[type="submit"] {
-  background-color: #04aa6d;
-  color: white;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  float: right;
-}
-
-input[type="submit"]:hover {
-  background-color: #45a049;
-}
-
-.container {
-  border-radius: 5px;
-  background-color: #f2f2f2;
-  padding: 20px;
-}
-
-.col-25 {
-  float: left;
-  width: 25%;
-  margin-top: 6px;
-}
-
-.col-75 {
-  float: left;
-  width: 75%;
-  margin-top: 6px;
-}
-
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
-@media screen and (max-width: 600px) {
-  .col-25,
-  .col-75,
-  input[type="submit"] {
-    width: 100%;
-    margin-top: 0;
   }
 }
-</style>
+</script>
+
+<style scoped></style>

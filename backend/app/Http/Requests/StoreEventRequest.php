@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreEventRequest extends FormRequest
@@ -13,7 +14,7 @@ class StoreEventRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +25,20 @@ class StoreEventRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title' => 'required|min:3|max:255',
+            'category' => 'nullable|min:3|max:255',
+            'description' => 'nullable|min:3',
+            'location' => 'nullable|min:3',
+            'date' => 'nullable',
+            'time' => 'nullable',
         ];
+    }
+
+    public function validated($key = null, $default = null)
+    {
+        return array_merge([
+            'user_id' => User::first()->id
+        ],
+        parent::validated());
     }
 }
