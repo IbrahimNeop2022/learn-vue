@@ -1,8 +1,13 @@
 <script setup>
-import EventService from '@/services/EventService';
+import EventService from "@/services/EventService";
 </script>
 <template>
-  <button @click="deleteEvent(event.id)" type="button" class="btn-close btn-close-white" aria-label="Close"></button>
+  <button
+    @click="deleteEvent(event.id)"
+    type="button"
+    class="btn-close btn-close-red"
+    aria-label="Close"
+  ></button>
   <router-link :to="{ name: 'events.show', params: { id: event.id } }">
     <div class="event-card">
       <span>@ {{ event.time }} on {{ event.date }}</span>
@@ -21,17 +26,17 @@ export default {
     return {};
   },
   methods: {
-    deleteEvent(eventId){
+    deleteEvent(eventId) {
       EventService.deleteEvent(eventId)
-      .then((response) => {
-        this.events = response.data;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-      this.$emit('delete-event', eventId)
-    }
-  }
+        .then((response) => {
+          this.events = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      this.$emit("delete-event", eventId);
+    },
+  },
 };
 </script>
 
