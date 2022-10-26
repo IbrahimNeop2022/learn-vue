@@ -14,10 +14,11 @@ import HelloWorld from "@/components/HelloWorld.vue";
     />
 
     <div class="wrapper">
-      <HelloWorld msg="Hello World" />
+      <HelloWorld msg="Learn Vue With Abo elsaid" />
       <nav>
         <RouterLink :to="{ name: 'events' }">Events</RouterLink>
         <RouterLink :to="{ name: 'events.create' }">Event Create</RouterLink>
+        <RouterLink :to="{ name: 'alsaid-tasks' }">Alsaid Tasks</RouterLink>
         <RouterLink :to="{ name: 'about' }">About</RouterLink>
       </nav>
     </div>

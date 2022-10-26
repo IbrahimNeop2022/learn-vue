@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-  baseURL: "https://vue-backend.local/api",
+  baseURL: "http://vue-backend.local/api",
   headers: {
     Accept: "application/json",
   },

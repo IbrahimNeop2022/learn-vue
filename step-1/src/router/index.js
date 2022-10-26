@@ -3,6 +3,7 @@ import EventList from "@/views/events/EventList.vue";
 import EventDetails from "@/views/events/EventDetails.vue";
 import EventCreate from "@/views/events/EventCreate.vue";
 import AboutView from "@/views/AboutView.vue";
+import FromToDate from "@/views/alsaid_tasks/FromToDate.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -11,7 +12,7 @@ const router = createRouter({
       path: "/",
       name: "events",
       component: EventList,
-      props: route => ({page: parseInt(route.query.page) || 1}),
+      props: (route) => ({ page: parseInt(route.query.page) || 1 }),
     },
     {
       path: "/events/:id",
@@ -28,6 +29,11 @@ const router = createRouter({
       path: "/about",
       name: "about",
       component: AboutView,
+    },
+    {
+      path: "/alsaid-tasks",
+      name: "alsaid-tasks",
+      component: FromToDate,
     },
   ],
 });

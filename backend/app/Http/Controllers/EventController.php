@@ -15,7 +15,7 @@ class EventController extends Controller
      */
     public function index()
     {
-        return response()->json(Event::with('user')->paginate(5));
+        return response()->json(Event::with('user')->latest()->paginate(5));
     }
 
     /**
